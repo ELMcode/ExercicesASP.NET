@@ -1,5 +1,40 @@
+@model IEnumerable<ExercicesASP.NET.Models.Contact>
+
 @{
     ViewData["Title"] = "Contacts";
 }
 
-<h1>Page pour afficher les contacts</h1>
+<h1>@ViewData["PageTitle"]</h1>
+<p>Nombre total de contacts : @ViewBag.TotalContacts</p>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in Model)
+            {
+                <tr>
+                    <td>@contact.FirstName</td>
+                    <td>@contact.LastName</td>
+                    <td>@contact.Email</td>
+                    <td>@contact.PhoneNumber</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@contact.Id" class="btn btn-info btn-sm">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Create" class="btn btn-primary">Add New Contact</a>
+</div>
